@@ -17,10 +17,8 @@
 #endif // DS_DEF
 
 #define ASSERT(cond, msg)                                             \
-    do                                                                \
-    {                                                                 \
-        if (!(cond))                                                  \
-        {                                                             \
+    do {                                                              \
+        if (!(cond)) {                                                \
             fprintf(stderr, "[ERROR] Assertion failed: %s\n", (msg)); \
             exit(1);                                                  \
         }                                                             \
@@ -83,8 +81,7 @@ DS_DEF DynamicString *DS_create_from_string_parts(const char *str, size_t size) 
     ASSERT(ds, "Cannot allocate memory for DynamicString");
     ds->size = str ? MIN(size, strlen(str)) : 0;
     ds->capacity = 128;
-    while (ds->capacity < ds->size)
-    {
+    while (ds->capacity < ds->size) {
         if (ds->capacity == 0) ds->capacity = 128;
         else ds->capacity *= 2;
     }
@@ -113,8 +110,7 @@ DS_DEF void DS_clear(DynamicString *ds) {
 DS_DEF bool DS_equal(const DynamicString *ds1, const DynamicString *ds2) {
     ASSERT(ds1 && ds2, "Cannot compare a NULL DynamicString");
     if (ds1->size != ds2->size) return false;
-    for (size_t i = 0; i < ds1->size; i++)
-    {
+    for (size_t i = 0; i < ds1->size; i++) {
         if (ds1->data[i] != ds2->data[i]) return false;
     }
     return true;
@@ -128,8 +124,7 @@ DS_DEF bool DS_is_first(const DynamicString *ds, char c) {
 
 DS_DEF void DS_append_char(DynamicString *ds, const char c) {
     ASSERT(ds, "Cannot append to a null DynamicString");
-    if (ds->size == ds->capacity)
-    {
+    if (ds->size == ds->capacity) {
         ds->capacity *= 2;
         ds->data = (char *)realloc(ds->data, ds->capacity);
         ASSERT(ds->data, "Cannot allocate enough memory for data in the DynamicString");
@@ -140,8 +135,7 @@ DS_DEF void DS_append_char(DynamicString *ds, const char c) {
 DS_DEF void DS_append_str(DynamicString *ds, const char *str, size_t size) {
     ASSERT(ds, "Cannot append to a null DynamicString");
     size = str ? MIN(size, strlen(str)) : 0;
-    while (ds->size + strlen(str) > ds->capacity)
-    {
+    while (ds->size + strlen(str) > ds->capacity) {
         ds->capacity *= 2;
         ds->data = (char *)realloc(ds->data, ds->capacity);
         ASSERT(ds->data, "Cannot allocate memory for data in the DynamicString");
@@ -237,10 +231,8 @@ DS_DEF DynamicString *DS_chop_left(DynamicString *ds, size_t index) {
 DS_DEF DynamicString *DS_chop_by_delim(DynamicString *ds, char delim) {
     ASSERT(ds, "Cannot chop a NULL DynamicString");
     size_t index = -1;
-    for (size_t i = 0; i < ds->size; i++)
-    {
-        if (ds->data[i] == delim)
-        {
+    for (size_t i = 0; i < ds->size; i++) {
+        if (ds->data[i] == delim) {
             index = i;
             break;
         }

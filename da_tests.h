@@ -9,8 +9,7 @@
 #include <stdbool.h>
 
 #define DEFER_RETURN(ret)  \
-    do                     \
-    {                      \
+    do {                   \
         ret_value = (ret); \
         goto defer;        \
     } while (0)

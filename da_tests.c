@@ -9,16 +9,13 @@
 
 bool test_create() {
     bool ret_value = true;
-
     const char *str = "abcdefghijklmnop";
-    // TODO :FIGURE OUT WHY STRLEN SEGFAULT
     DynamicString *ds1 = DS(str);
     DynamicString *ds2 = DS_create_from_string_parts(str, 8);
     DynamicString *ds3 = DS("");
     DynamicString *ds4 = DS(NULL);
     if (ds1->size != 16 || ds2->size != 8 || ds3->size != 0 || ds4->size != 0) DEFER_RETURN(false);
-    for (int i = 0; i < ds1->size; i++)
-    {
+    for (int i = 0; i < ds1->size; i++) {
         if (ds1->data[i] != str[i]) DEFER_RETURN(false);
         if (i < ds2->size && ds2->data[i] != str[i]) DEFER_RETURN(false);
     }
@@ -60,8 +57,7 @@ bool test_get_char_at() {
 
     DynamicString *ds1 = DS("0123456789");
 
-    for (size_t i = 0; i < ds1->size; i++)
-    {
+    for (size_t i = 0; i < ds1->size; i++) {
         if (DS_get_char_at(ds1, i) != (char)INT_TO_CHAR(i)) DEFER_RETURN(false);
     }
 
@@ -74,8 +70,7 @@ bool test_set_char_at() {
     bool ret_value = true;
 
     DynamicString *ds1 = DS("xxxxxxxxxx");
-    for (int i = 0; i < ds1->size; i++)
-    {
+    for (int i = 0; i < ds1->size; i++) {
         DS_set_char_at(ds1, i, (char)INT_TO_CHAR(i));
         if (ds1->data[i] != (char)INT_TO_CHAR(i)) DEFER_RETURN(false);
     }
