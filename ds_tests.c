@@ -1,11 +1,11 @@
 /**
- * @file da_tests.c (Implementation of the tests)
+ * @file ds_tests.c (Implementation of the tests)
  * @author : Taraxtix (Brauer Antonin)
  */
 
 #define DS_IMPLEMENTATION
-#include "da_tests.h"
-#include "da.h"
+#include "ds_tests.h"
+#include "ds.h"
 
 bool test_create() {
     bool ret_value = true;
